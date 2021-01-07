@@ -1,17 +1,38 @@
+=begin
+    
+Set up the game initially
+    Create a game board
+    Create a couple players
+Start the game loop
+    Render the board
+    Ask for and validate the current player's coordinates
+    If the game should end
+        Display the proper victory / draw message
+        Stop looping
+    Else
+        Switch to the next player and keep looping
+    
+=end
+
+
 # Controls the game play
 class TicTacToe
     # initialize
+    def initialize
         # set up the board
+        @board = Board.new
         # set up the players
         # assign the starting player
-
+    end
     # play
+    def play
+        @board.render
         # loop infinitely
             # call the board rendering method
             # ask for coordinates from the current player
             # break the loop IF the game is over
             # switch players
-
+    end
     # check_game_over
         # check_victory
         # check_draw
@@ -32,8 +53,15 @@ end
 
 # Manages all player-related functionality
 class Player
+    attr_accessor :name, :piece
+
     # initialize
-        # Set marker type (e.g. X or O)
+    def initialize(name, marker, board)
+        #set market type (e.g. X or O)
+        @name = name
+        @marker = marker
+        @board = board
+    end
 
     # get_coordinates
         # loop infinitely
@@ -56,11 +84,25 @@ end
 # Maintains game board state
 class Board
     # initialize board
+    def initialize
         # set up blank data structure
+        #creates array of 3 arrays => [[nil, nil, nil], [nil, nil, nil], [nil, nil, nil]]
+        @board = Array.new(3){Array.new(3)}
+    end
 
     # render
+    def render
+        puts
         # loop through data structure
-            # display an existing marker if any, else blank
+        @board.each do |row|
+            row.each do |cell|
+                # display an existing marker if any, else blank
+                cell.nil? ? print("-") : print(cell.to_s)
+            end
+            puts
+        end
+        puts
+    end
 
     # add_piece
         # IF piece_location_valid?
@@ -106,3 +148,6 @@ class Board
     # full?
         # does every square contain a piece?
 end
+
+t = TicTacToe.new
+t.play
