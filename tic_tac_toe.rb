@@ -24,12 +24,14 @@ class TicTacToe
         # set up the players
         @player_x = Player.new("Player X", :x, @board)
         @player_y = Player.new("Player Y", :y, @board)
-        
+
         # assign the starting player
+        @current_player = @player_x
     end
 
     # play
     def play
+
         @board.render
         # loop infinitely
             # call the board rendering method
@@ -52,7 +54,14 @@ class TicTacToe
 
 
     # switch_players
-        # PlayerX >> PlayerO or vice versa
+    def switch_players
+        if @current_player == @player_x
+            @current_player = @player_y
+        else
+            @current_player = @player_x
+        end
+    end
+    
 end
 
 # Manages all player-related functionality
