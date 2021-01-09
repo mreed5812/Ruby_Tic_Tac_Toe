@@ -22,8 +22,12 @@ class TicTacToe
         # set up the board
         @board = Board.new
         # set up the players
+        @player_x = Player.new("Player X", :x, @board)
+        @player_y = Player.new("Player Y", :y, @board)
+        
         # assign the starting player
     end
+
     # play
     def play
         @board.render
