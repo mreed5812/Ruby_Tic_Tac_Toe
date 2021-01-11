@@ -31,27 +31,54 @@ class TicTacToe
 
     # play
     def play
-
-        @board.render
         # loop infinitely
-            # call the board rendering method
+        loop do
+             # call the board rendering method
+            @board.render
+        
             # ask for coordinates from the current player
+            @current_player.get_coordinates
+            
             # break the loop IF the game is over
+            break if check_game_over
+
             # switch players
+            switch_players
+        end
+        
     end
     # check_game_over
+    def check_game_over
         # check_victory
         # check_draw
+        check_victory || check_draw
+    end
 
     # check_victory
+    def check_victory
         # IF board says current player's piece has
         # a winning_combination?
+        if @board.winning_combination?(@current_player.piece)
             # display a victory message
+            puts "Congratulations #{@current_player.name}, you win!"
+            true
+        else
+            false
+        end
+    end
 
     # check_draw
-        # IF Board says we've filled up
-            # display a draw message
+    def check_draw
 
+        # IF Board says we've filled up
+        if @board.full?
+            # display a draw message
+            puts "Draw game"
+            true
+        else
+            false
+        end
+    end
 
     # switch_players
     def switch_players
@@ -118,14 +145,25 @@ class Board
     end
 
     # add_piece
+    def add_piece(coords, piece)
         # IF piece_location_valid?
+        if piece_location_valid?(coords)
             # place piece
-        # ELSE
-            # display error message
+            @board[coords[0]][coords[1]] = piece
+            true
+        else
+            false
+        end
+    end
 
     # piece_location_valid?
+    def piece_location_valid?(coords)
         # Is the placement within_valid_coordinates?
-        # Are the piece coordinates_available?
+        if within_valid_coordinates?(coords)
+            #Are the piece coordinates_available?
+            coordinates_available?(coords)
+        end
+    end
 
     # within_valid_coordinates?
         # UNLESS piece coords are in the acceptible range
