@@ -5,8 +5,8 @@ class TicTacToe
         @board = Board.new
 
         # set up the players
-        @player_x = Player.new("Madame X", :x, @board)
-        @player_y = Player.new("Mister Y", :y, @board)
+        @player_x = Player.new("Player X", :X, @board)
+        @player_y = Player.new("Player Y", :Y, @board)
 
         # assign the starting player
         @current_player = @player_x
